@@ -205,4 +205,71 @@ public class Common
     
     #endregion
 
+    #region Сумма 3х
+
+    [Fact]
+    public void Sum3()
+    {
+        var result = ThreeSum(new[] { -2,0,0,2,2 });
+    }
+
+    public IList<IList<int>> ThreeSum(int[] a)
+    {
+        var result = new List<IList<int>>();
+        Array.Sort(a);
+        for (var i = 0; i < a.Length; i++)
+        {
+            int j = i + 1,
+                k = a.Length - 1;
+            while (j < k)
+            {
+
+                if (a[i] + a[j] + a[k] == 0)
+                {
+                    result.Add(new List<int> { a[i], a[j], a[k] });
+                }
+                if (a[i] + a[j] + a[k] == 0)
+                {
+                    while (k>j && a[k]==a[k-1])
+                    {
+                        k--;
+                    }
+
+                    k--;
+                    while (k>j && a[j]==a[j+1])
+                    {
+                        j++;
+                    }
+
+                    j++;
+                }
+                else if (a[i] + a[j] + a[k] > 0)
+                {
+                    while (k>j && a[k]==a[k-1])
+                    {
+                        k--;
+                    }
+
+                    k--;
+                }
+                else if (a[i] + a[j] + a[k] < 0)
+                {
+                    while (k>j && a[j]==a[j+1])
+                    {
+                        j++;
+                    }
+
+                    j++;
+                }
+
+            }
+
+            while (i < a.Length - 2 && a[i] == a[i + 1]) i++;
+        }
+
+        return result;
+    }
+
+    #endregion
+
 }
