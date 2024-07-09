@@ -1,0 +1,12 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=266d8049_002D2355_002D4d4c_002Dad83_002D8c1b35a7ce01/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.TreeCases.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.Common.SubstringLength&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.Common.MaxPalindromeSubstring&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.Common.ZigZagConversion&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.Common.Atoi&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.Common.FindClosestMax&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A780E68D-43AB-4978-A927-DA41EEC6E7D5::net7.0::Leet.Common.RomanNums&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

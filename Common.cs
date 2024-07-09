@@ -1,0 +1,208 @@
+﻿namespace Leet;
+
+public class Common
+{
+    #region Длинна наибольшей строки с уникальным символами
+
+    [Fact]
+    public void SubstringLength()
+    {
+        var result = LengthOfLongestSubstring("pwwkew");
+    }
+
+    public int LengthOfLongestSubstring(string s) {
+        if (string.IsNullOrEmpty(s)) return 0;
+        if (s.Length==1) return 1;
+        var left=0;
+        var max=1;
+        for (var right=1;right<s.Length;right++)
+        {
+            if (!s.Substring(left,right-left).Contains(s[right])){
+                max=Math.Max(max,right-left+1);
+            }
+            else
+            {
+                left =s.Substring(left,right-left).IndexOf(s[right])+left+1;
+            }
+        }
+        return max;
+    }
+    #endregion
+
+    #region Длинна наибольшего палиндрома в строке
+
+    [Fact]
+    public void MaxPalindromeSubstring()
+    {
+        var result = LongestPalindrome("ccc");
+    }
+    
+    public string LongestPalindrome(string s) {
+        if (string.IsNullOrEmpty(s)||s.Length==1) return s;
+        var result=s[0].ToString();
+        for (var i=0; i<s.Length;i++){
+            var odd=MaxPalindromeForCurrentChar(s, i, 0);
+            var even=MaxPalindromeForCurrentChar(s, i, 1);
+            result = result.Length >= Math.Max(odd.Length, even.Length) 
+                ? result 
+                : odd.Length > even.Length 
+                    ? odd 
+                    : even;
+        }
+        return result;
+    }
+
+    private string MaxPalindromeForCurrentChar(string s, int pos, int odd){
+        var result=s[pos].ToString();
+        for (var i=0;i<s.Length;i++)
+        {
+            if (i  + 1 + odd + pos > s.Length || pos - i < 0) return result;
+            if (!IsPalindrome(s.Substring(pos-i, i+i+1+odd))){
+                return result;
+            }
+            result=s.Substring(pos-i, i+i+1+odd);
+        }
+        return result;
+    }
+
+    private bool IsPalindrome(string s){
+        char[] array = s.ToCharArray();
+        Array.Reverse(array);
+        return s==new String(array);
+    }
+
+    #endregion
+
+    #region ЗигЗаг преобразование
+
+    [Fact]
+    public void ZigZagConversion()
+    {
+        var s = "PAYPALISHIRING";
+        var result = Convert(s, 4);
+        var foo = result == "PINALSIGYAHRPI";
+    }
+    
+    public string Convert(string s, int k) {
+        if (string.IsNullOrEmpty(s)) return s;
+        if (k==1) return s;
+        var result="";
+
+        for (var j = 1; j <= k; j++)
+        {
+            var c=1;
+            var pointer=1;
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (c == j)
+                {
+                    result += s[i].ToString();
+                }
+                if (c==k) pointer=-1;
+                if (c==1) pointer=1;
+                c += pointer;
+            }
+        }
+        return result;
+    }
+
+    #endregion
+
+    #region Atoi 
+
+    [Fact]
+    public void Atoi()
+    {
+        var result = MyAtoi("42");
+    }
+    public int MyAtoi(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return 0;
+        var result="";
+        for (var i=0;i<s.Length;i++){
+            if (char.IsLetter(s[i]) || s[i] == '.')
+            {
+                break;
+            }
+
+            if (s[i] == ' ')
+            {
+                if (!string.IsNullOrEmpty(result)) break;
+                continue;
+            }
+
+            if (s[i] == '+' || s[i] == '-')
+            {
+                if (!string.IsNullOrEmpty(result))
+                {
+                    break;
+                }
+            }
+            result += s[i];
+        }
+
+        if (string.IsNullOrEmpty(result)) return 0;
+        if (!result.Any(char.IsDigit)) return 0;
+
+
+        
+        if (int.TryParse(result, out var newOne))
+        {
+            return newOne;
+        }
+        
+        return result.Contains('-') ? int.MinValue : int.MaxValue;
+    }
+
+    #endregion
+
+    #region Преобразование в римские цифры
+
+    [Fact]
+    public void RomanNums()
+        
+    {
+        var result = IntToRoman(1994);
+    }
+    
+    public string IntToRoman(int num)
+    {
+        var romanOnes = new Dictionary<int, string> { { 0, "I" }, { 1, "X" }, { 2, "C" }, {3,"M"} };
+        var romanFiths = new Dictionary<int, string> { { 0, "V" }, { 1, "L" }, { 2, "D" } };
+        var result = "";
+        var i = 0;
+        while (num>0)
+        {
+            var c = num % 10;
+            if (c == 4)
+            {
+                result = romanOnes[i] + romanFiths[i] + result;
+            }
+            else if (c==9)
+            {
+                result = romanOnes[i] + romanOnes[i+1] + result;
+            }
+            else if (c!=0)
+            {
+                while (c > 0)
+                {
+                    if (c== 5)
+                    {
+                        result = romanFiths[i] + result;
+                        break;
+                    }
+
+                    result = romanOnes[i] + result;
+                    c--;
+                }
+            }
+            num /= 10;
+            i++;
+        }
+        return result;
+    }
+
+    
+    #endregion
+
+}
