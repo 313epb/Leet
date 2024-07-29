@@ -272,4 +272,88 @@ public class Common
 
     #endregion
 
+    #region Сумма трёх ближе всего
+
+    [Fact]
+    public void ThreeClosest()
+    {
+        var result = ThreeSumClosest(new []{-1,2,1-4} , 1);
+    }
+    
+    public int ThreeSumClosest(int[] nums, int target) {
+        Array.Sort(nums);
+        var max=Math.Abs(nums[0]+nums[1]+nums[2]-target);
+        var result=nums[0]+nums[1]+nums[2];
+        for (var i=0;i<nums.Length;i++){
+            var j=i+1;
+            var k=nums.Length-1;
+            while (k>j){
+                var current=nums[i]+nums[k]+nums[j];
+                if (Math.Abs(current-target)<max){
+                    max=Math.Abs(current-target);
+                    result=current;
+                }
+                if (current-target>0){
+                    k--;
+                }
+                if (current-target<0){
+                    j++;
+                }
+                if (current==target){
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
+
+    #endregion
+
+    #region Комбинация символов телефон
+
+    [Fact]
+    public void PhoneCombine()
+    {
+        var result = LetterCombinations("");
+    }
+    
+    public IList<string> LetterCombinations(string digits)
+    {
+        if (string.IsNullOrEmpty(digits)) return new List<string>();
+        var result = new List<string>{""};
+        for (int i = 0; i < digits.Length; i++)
+        {
+            result=DecardLists(result, _phoneLetters[digits[i].ToString()].ToList());
+        }
+
+        return result;
+    }
+
+    public List<string> DecardLists(List<string> source, List<char> multi)
+    {
+        var result = new List<string>();
+        foreach (var s in source)
+        {
+            foreach (var m in multi)
+            {
+                result.Add(s+m);
+            }
+        }
+        return result;
+    }
+
+    private Dictionary<string, string> _phoneLetters = new Dictionary<string, string>
+    {
+        { "2", "abc" },
+        { "3", "def" },
+        { "4", "ghi" },
+        { "5", "jkl" },
+        { "6", "mno" },
+        { "7", "pqrs" },
+        { "8", "tuv" },
+        { "9", "wxyz" },
+
+    };
+
+    #endregion
 }
